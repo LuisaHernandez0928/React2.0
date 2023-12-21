@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 0;
+}
+
+
+.board-row{
+  width: 102px;
+  height: fit-content;
+}
+
+.square{
+ background-color: white;
+ color: black;
+ font-weight: bolder;
+ font-size: large;
+ width: 34px;
+ height: 34px;;
+ border: 1px solid #999;
+ float: left;
+}
