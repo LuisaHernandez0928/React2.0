@@ -2,11 +2,11 @@ import "./App.css";
 import { useState } from "react";
 
 /**
- * Representa cada celda de las 9 que tiene el tablero. Es nieto de Game y hijo de Board.
+ * Representa un componente, que es una celda de las 9 que tiene el tic-toc. Es nieto de Game y hijo de Board.
  * @prop {onSquareClick} function cada que le haga clicl al cuadrado llamo la funcion handleClick(i) en el componente padre. Donde i es la posicion de la celda a la que se dio click
  * @prop {value} string X/0 dependiendo del turno que vaya, va a pintar en el cuadrado un X o O
  * 
- * @returns retorna un boton marcado con X/0 en la posicion que se desencadeno por el evento Onclick que llama a la prop onSquareClic() 
+ * @returns retorna UN cuadrado marcado con X/0 en la posicion que se desencadeno por el evento Onclick que llama a la prop onSquareClic() 
  */
 function Square({ value, onSquareClick }) {
   return (
@@ -17,12 +17,15 @@ function Square({ value, onSquareClick }) {
 }
 
 /**
- * 
- * @param {*} param0 
+ * Es un componente, que une 9 cuadrados para crear un tablero. Dentro tiene la logica para identificar la jugada que se eligio y si hubo un ganador o no.
+ * @prop {xIsNext} boolean, el padre le dice al hijo si el jugador siguiente será un X o 0, para que Board usando la funcion handleClick, sepa qué retornar en el cuadrado
+ * @prop {squares}
+ * @prop {*} param0 
  * @returns 
  */
 function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
+  console.log('lo paso a calculateWinner: ' + squares)
   let status;
 
   function handleClick(i) {
@@ -30,6 +33,7 @@ function Board({ xIsNext, squares, onPlay }) {
       return;
     }
     const nextSquares = squares.slice();
+    console.log('lo tengo en Board creando NextS: ' + squares)
     if (xIsNext) {
       nextSquares[i] = "X";
     } else {
@@ -46,6 +50,7 @@ function Board({ xIsNext, squares, onPlay }) {
 
   return (
     <>
+    {console.log('mando eso en una posicion para que Square nieto imprima' + squares)}
       <div className="status"> {status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
@@ -66,20 +71,27 @@ function Board({ xIsNext, squares, onPlay }) {
   );
 }
 
+/**
+ * 
+ * @returns 
+ */
+
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
-
+  console.log('lo defino por primera vez: ' + currentSquares);
   function handleGame(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory); //creates a new array that contains all the items in history, followed by nextSquares
     setCurrentMove(nextHistory.length - 1);
+    console.log(nextHistory.length - 1);
   }
 
   function jumpTo(nextMove) {
-    setCurrentMove(nextMove);
+    console.log('segunda ' + nextMove);
+    setCurrentMove(nextMove);//Cuando quiero devolverme, ajusta el movimiento actual al boton de la lista que le di click
   }
 
   const moves = history.map((squares, move) => {
