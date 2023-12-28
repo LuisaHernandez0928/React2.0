@@ -1,11 +1,13 @@
-import styles from './index.module.css'
+import styles from "./index.module.css";
 
-function MainScreen () {
-  return (
+function MainScreen({ content }) {
+    return ( 
     <div className={styles.container}>
-      Contenido
+      {content}
     </div>
-  )
-}
+    )
+  
+  };
 
-export { MainScreen } 
+  
+export { MainScreen };

@@ -1,7 +1,13 @@
+import { FolderList } from "../folderList";
 import styles from "./index.module.css";
 
-function Sidebar() {
-  return <div className={styles.container}>Hola Mundo</div>;
+function Sidebar({label, folders, handleClick}) {
+  return (
+  <div className={styles.container}>
+    <FolderList label={label} data={folders[label]} notifyClick={handleClick} />
+  </div>
+  )
+
 }
 
 export { Sidebar };
