@@ -1,5 +1,5 @@
 import "./App.css";
-import Cascader  from "./components/cascader";
+import Cascader from "./components/cascader";
 import ComboBox from "./components/combobox";
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
     "Lista de Schilldner",
   ];
 
-  const menuCars = [
+  const menusDesplegables = [
     {
       label: "Mazda",
       value: "mazda",
@@ -89,7 +89,7 @@ const App = () => {
       <h3>ComboBox con Filtro</h3>
       <ComboBox options={opciones} />
       <h3>Cascader</h3>
-      <Cascader menuCars={menuCars} />
+      <Cascader data={menusDesplegables} />
     </div>
   );
 };
