@@ -16,6 +16,8 @@ function SidebarLayout({
     folderContextMenuRef.current.style.left = startX + "px";
   }, [startX, startY]);
 
+  console.log(activeContextMenu)
+
   return (
     <div className={styles.container}>
       <div

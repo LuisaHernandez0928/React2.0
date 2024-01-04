@@ -35,6 +35,7 @@ function App() {
   };
 
   const folderRightClickHandle = (startX, startY) => {
+    console.log("hola");
     setStartX(startX);
     setStartY(startY);
     setActiveContextMenu(1);

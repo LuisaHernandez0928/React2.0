@@ -1,5 +1,6 @@
 import styles from "./index.module.css";
 import { ListItem } from "../listItem";
+import { useState } from "react";
 
 function List({
   label,
@@ -8,7 +9,8 @@ function List({
   notifyItemClick,
   folderRightClick,
 }) {
-  // guarda los elementos renderizados
+
+  const [toggle , setToggle] = useState(false); // guarda los elementos renderizados
   const arrElements = [];
   // Itera por los items que recibe
   for (const key in items) {
@@ -31,13 +33,22 @@ function List({
 
   const folderRightClickHandle = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     folderRightClick(e.clientX, e.clientY);
+    console.log(e);
+  };
+
+  const expandCollapse = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setToggle(!toggle);
+    console.log(e);
   };
 
   return (
     <div className={styles.list}>
-      <div onContextMenu={(e) => folderRightClickHandle(e)}>{label}</div>
-      <div style={{ marginLeft: marginLeft }}>{arrElements}</div>
+      <div onContextMenu={(e) => folderRightClickHandle(e)} onClick={(e) => expandCollapse(e)}>{label}</div>
+      <div style={{ marginLeft: marginLeft, display: toggle ? "none" : "block" }}>{arrElements}</div>
     </div>
   );
 }
