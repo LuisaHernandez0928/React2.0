@@ -99,7 +99,7 @@ function Sidebar({ label, folders, handleClick, menuContainer, notifyDataChange 
             position: "absolute",
             border: "1px solid #eee",
             borderRadius: "8px",
-            left: "50%",
+            left: "30%",
             top: "50%",
             transform: "translateX(-50%) translateY(-50%)",
             backgroundColor: "#222",
