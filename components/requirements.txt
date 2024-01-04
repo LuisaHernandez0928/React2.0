@@ -1,0 +1,80 @@
+Combobox:
+  Recibe una lista de opciones, y un label.
+  ["Toy Story 1", "El museo del oro", "Cacería en venecia", "Como entrenar a tu dragón"]
+Transfer:
+  Recibe 2 listas de opciones, a y b, que serán respectivamente el source y el target.
+  ["Toy Story 1", "El museo del oro", "Cacería en venecia", "Como entrenar a tu dragón"]
+  ["Toy Story 2"]
+Cascader:
+  Recibe una lista anidada de opciones, y un label.
+  Ejemplo de lista anidada: 
+  [
+    {
+      label: "Mazda",
+      value: "mazda",
+      children: [
+        {
+          label: "SUV",
+          value: "suv",
+          children: [
+            {
+              label: "Mazda CX4",
+              value: "mazda_cx4",
+            },
+            {
+              label: "Mazda RX8",
+              value: "mazda_rx8",
+            }
+          ]
+        },
+        {
+          label: "Sedán",
+          value: "sedan",
+          children: [
+            {
+              label: "Mazda 2",
+              value: "mazda_2",
+            },
+            {
+              label: "Mazda 3",
+              value: "mazda_3",
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Porsche",
+      value: "porsche",
+      children: [
+        {
+          label: "Sedan",
+          value: "sedan",
+          children: [
+            {
+              label: "Porsche 911",
+              value: "porsche_911",
+            },
+            {
+              label: "Porsche Tucan",
+              value: "porsche_tucan",
+            }
+          ]
+        },
+        {
+          label: "Sports",
+          value: "sports",
+          children: [
+            {
+              label: "Porsche Carrera",
+              value: "porsche_carrera",
+            },
+            {
+              label: "Porsche Cayenne",
+              value: "porsche_cayenne",
+            }
+          ]
+        }
+      ]
+    }
+  ]
