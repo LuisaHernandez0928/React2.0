@@ -35,9 +35,11 @@ const ComboBox = ({ options }) => {
     console.log("valor searched: " + searchTerm)
   }
 
-  const dropDown = () => {
+  const dropDown = (e) => {
+    e.stopPropagation();
     setIsOpen(!isOpen);
-    setFilteredOptions(options)
+    console.log("tocado");
+    setFilteredOptions(options);
 
   }
 
@@ -52,7 +54,7 @@ const ComboBox = ({ options }) => {
           placeholder="Buscar..."
           value={searchTerm}
           onChange={handleSearch}
-          onClick={dropDown}
+          onClick={(e) => dropDown(e)}
         />
         <button onClick={(e) => clearFilteredOptions()}>Clear</button>
         <ul className={isOpen ? styles.optionsContainer : styles.closed}>
