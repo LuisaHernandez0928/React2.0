@@ -33,16 +33,12 @@ function List({
 
   const folderRightClickHandle = (e) => {
     e.preventDefault();
-    e.stopPropagation();
     folderRightClick(e.clientX, e.clientY);
-    console.log(e);
   };
 
   const expandCollapse = (e) => {
     e.preventDefault();
-    e.stopPropagation();
     setToggle(!toggle);
-    console.log(e);
   };
 
   return (
