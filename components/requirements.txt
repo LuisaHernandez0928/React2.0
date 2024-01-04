@@ -78,3 +78,11 @@ Cascader:
       ]
     }
   ]
+
+  //En este ejemplo:
+
+ComboBox es un componente funcional que recibe un array de opciones como prop (options).
+Se utiliza el estado (useState) para almacenar el término de búsqueda (searchTerm) y las opciones filtradas (filteredOptions).
+El método handleSearch se ejecuta cada vez que el usuario escribe en el campo de búsqueda. Filtra las opciones según el término de búsqueda actual y actualiza el estado.
+El componente renderiza un input para la búsqueda y un select con las opciones filtradas.
+Este es un componente simple que puedes ajustar según tus necesidades específicas. ¡Espero que te sea útil!

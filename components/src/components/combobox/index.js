@@ -1,29 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import styles from "./index.module.css";
 
-const ComboBox = () => {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+const ComboBox = ({ options }) => {
+  const [isOpen, setIsOpen] =useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredOptions, setFilteredOptions] = useState(options);
 
-  const options =  ["Toy Story 1", "El museo del oro", "Cacería en venecia", "Como entrenar a tu dragón"]
+  const handleSearch = (e) => {
+    const newSearchLetter = e.target.value;
+    setSearchTerm(newSearchLetter);
+    console.log(newSearchLetter);
+
+    const newFilteredOptions = options.filter((option) =>
+    option.toLowerCase().includes(newSearchLetter.toLowerCase())
+  );
+    if(newFilteredOptions.length > 0) {
+      setFilteredOptions(newFilteredOptions);
+    } else{
+      setFilteredOptions(["No existe"]);
+    }
+  
+    setIsOpen(true);
+  };
+ 
+  const selectedOptions = (option) => {
+    setIsOpen(false);
+    setSearchTerm(option);
+  }
+
+
+  const clearFilteredOptions = () => {
+    setSearchTerm("");
+    setIsOpen(false);
+    console.log("valor searched: " + searchTerm)
+  }
 
   const dropDown = () => {
     setIsOpen(!isOpen);
-  };
+    setFilteredOptions(options)
 
-  const handleOptionSelected = (option) => {
-    setSelectedOption(option);
+  }
+
+  const closeDropDown = () => {
     setIsOpen(false);
-  };
-
+  }
   return (
-    <div>
-      <div>
-        <button  onClick={dropDown}>
-          {selectedOption || 'Select an option'}
-        </button>
-        <ul>
-          {options.map((option, index) => (
-            <li key={index} onClick={() => handleOptionSelected(option)}>
+    <div className={styles.mainContainer} onClick={(closeDropDown)}>
+      <div className={styles.comboboxContainer}>
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={handleSearch}
+          onClick={dropDown}
+        />
+        <button onClick={(e) => clearFilteredOptions()}>Clear</button>
+        <ul className={isOpen ? styles.optionsContainer : styles.closed}>
+          {filteredOptions.map((option, index) => (
+            <li key={index} value={option} onClick={(e) => selectedOptions(option)}>
               {option}
             </li>
           ))}
