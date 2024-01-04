@@ -1,0 +1,19 @@
+.menu {
+  width: 150px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(27, 27, 41);
+  border-radius: 8px;
+  border: 1px solid gray;
+  color: rgb(172, 172, 170);
+  font-weight: 300;
+  font-size: 12px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  cursor: pointer;
+  top: 0px;
+  left: 50px;
+  position: absolute;
+  z-index: 2;
+}
