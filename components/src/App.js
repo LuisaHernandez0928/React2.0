@@ -1,6 +1,7 @@
 import "./App.css";
 import Cascader from "./components/cascader";
 import ComboBox from "./components/combobox";
+import CustomCascader from "./components/customCascader";
 
 const App = () => {
   const opciones = [
@@ -89,7 +90,7 @@ const App = () => {
       <h3>ComboBox con Filtro</h3>
       <ComboBox options={opciones} />
       <h3>Cascader</h3>
-      <Cascader data={menusDesplegables} />
+      <CustomCascader options={menusDesplegables} />
     </div>
   );
 };
