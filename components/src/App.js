@@ -1,7 +1,6 @@
 import "./App.css";
 import Cascader from "./components/cascader";
 import ComboBox from "./components/combobox";
-import CustomCascader from "./components/customCascader";
 
 const App = () => {
   const opciones = [
