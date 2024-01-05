@@ -90,7 +90,7 @@ const App = () => {
       <h3>ComboBox con Filtro</h3>
       <ComboBox options={opciones} />
       <h3>Cascader</h3>
-      <CustomCascader options={menusDesplegables} />
+      <Cascader data={menusDesplegables} />
     </div>
   );
 };
