@@ -1,35 +1,72 @@
 import { useState } from "react";
 import styles from "./index.module.css";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Cascader = ({ data }) => {
-  const [selectedValues, setSelectedValues] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenChildren, setIsOpenChildren] = useState(false);
+  const [menuDisplayed, setMenuDisplayed] = useState(data);
+  const [childrenOptions, setChildrenOptions] = useState([]);
 
-  const showOptions = () => {
-    setIsOpen(true);
-    console.log("si entró");
-  };
-  const handleItemClick = (value) => {
-    const newSelectedValues = [...selectedValues, value];
-    setSelectedValues(newSelectedValues);
+  const openOptions = () => {
+    setIsOpen(!isOpen);
   };
 
+  const showOptions = (options) => {
+    console.log("click");
+    return (
+      <ul className={styles.carList}>
+        {options.map((option) => (
+          <li>
+            {option.label}
+            <span>
+              <ArrowForwardIosIcon
+                style={{ fontSize: "14px" }}
+                onClick={() => activateChildrenOptions(option.children)}
+              />
+            </span>
+          </li>
+        ))}
+        <li>
+          {isOpenChildren ? showChildrenOptions(childrenOptions) : <div></div>}
+        </li>
+      </ul>
+    );
+  };
 
-  const renderMenu = (menuData) => {
-    console.log("render1")
-    return menuData.map((car) => (
-      <option onClick={() => renderMenu(car.children)}>{car.label}</option>
-    ));
+  const activateChildrenOptions = (children) => {
+    setIsOpenChildren(true);
+    setChildrenOptions(children);
+  };
+
+  const showChildrenOptions = (options) => {
+    console.log("click");
+    return (
+      <ul className={styles.childrenList}>
+        {options.map((option) => (
+          <li>
+            {option.label}
+            <span>
+              <ArrowForwardIosIcon
+                style={{ fontSize: "14px" }}
+                onClick={() => activateChildrenOptions(option.children)}
+              />
+            </span>
+          </li>
+        ))}
+      </ul>
+    );
   };
 
   return (
     <div className={styles.mainContainer}>
-      <select className={styles.dropDownMenu} onClick={() => showOptions()}>
-        <option value="" disabled selected>
-          Select Brand
-        </option>
-        {renderMenu(data)}
-      </select>
+      <div className={styles.boxContainer}>
+        <p>
+          <i>Select a Car</i>
+        </p>
+        <ArrowForwardIosIcon onClick={() => openOptions()} />
+        <div>{isOpen ? showOptions(menuDisplayed) : <div></div>}</div>
+      </div>
     </div>
   );
 };
