@@ -18,7 +18,7 @@ const Transfer = () => {
   };
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <div>
         <h3>Source</h3>
         <ul>
