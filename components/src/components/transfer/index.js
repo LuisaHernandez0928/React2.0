@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.css'
 
-const TransferComponent = () => {
+const Transfer = () => {
   const peliculasVistas = ["Toy Story 1", "El museo del oro", "Cacería en venecia", "Como entrenar a tu dragón", "Que paso ayer"];
 
   const [sourceList, setSourceList] = useState(peliculasVistas);
@@ -47,4 +47,4 @@ const TransferComponent = () => {
   );
 };
 
-export default TransferComponent;
+export default Transfer;

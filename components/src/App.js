@@ -96,6 +96,8 @@ const App = () => {
       <ComboBox options={opciones} />
       <h3>Cascader</h3>
       <Cascader data={menusDesplegables} />
+      <h3>Tranfer</h3>
+      <Transfer options={opciones} />
     </div>
   );
 
