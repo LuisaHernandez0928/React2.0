@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './index.module.css'
 
 const TransferComponent = () => {
   const peliculasVistas = ["Toy Story 1", "El museo del oro", "Cacería en venecia", "Como entrenar a tu dragón", "Que paso ayer"];

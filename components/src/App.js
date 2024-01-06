@@ -1,6 +1,7 @@
 import "./App.css";
 import Cascader from "./components/cascader";
 import ComboBox from "./components/combobox";
+import Transfer from "./components/transfer";
 
 // import Casca from "./casca";
 
@@ -86,15 +87,9 @@ const App = () => {
     },
   ];
 
-  // return <Casca />;
 
-  return (
-    <div className="App">
-      <Cascader data={menusDesplegables} />
-    </div>
-  );
 
-  /*
+
   return (
     <div className="App">
       <h3>ComboBox con Filtro</h3>
@@ -103,7 +98,7 @@ const App = () => {
       <Cascader data={menusDesplegables} />
     </div>
   );
-  */
+
 };
 
 export default App;
