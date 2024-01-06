@@ -19,11 +19,11 @@ const Transfer = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <div>
-        <h3>Source</h3>
-        <ul>
+      <div className={styles.boxOptions}>
+        <div style={{borderBottom:"1px solid black", width:"100%", padding:"4px"}}>Source</div>
+        <ul type="checkbox">
           {sourceList.map((item, index) => (
-            <li key={index} onClick={() => moveItem(index, sourceList, targetList)}>
+            <li type="checkbox" key={index} onClick={() => moveItem(index, sourceList, targetList)}>
               {item}
             </li>
           ))}
@@ -33,8 +33,8 @@ const Transfer = () => {
         <button onClick={() => setSourceList([])}>&gt;&gt;</button>
         <button onClick={() => setTargetList([])}>&lt;&lt;</button>
       </div>
-      <div>
-        <h3>Target</h3>
+      <div className={styles.boxOptions}>
+        <div style={{borderBottom:"1px solid black", width:"100%", padding:"4px"}}>Target</div>
         <ul>
           {targetList.map((item, index) => (
             <li key={index} onClick={() => moveItem(index, targetList, sourceList)}>
