@@ -1,43 +1,79 @@
-import React, { useState } from 'react';
-import styles from './index.module.css'
+import React, { useState } from "react";
+import styles from "./index.module.css";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-const Transfer = () => {
-  const peliculasVistas = ["Toy Story 1", "El museo del oro", "Cacería en venecia", "Como entrenar a tu dragón", "Que paso ayer"];
-
+const Transfer = ({ peliculasVistas }) => {
   const [sourceList, setSourceList] = useState(peliculasVistas);
   const [targetList, setTargetList] = useState([]);
+  const [clickedSource, setclickedSource] = useState(false);
+  const [indexSelected, setIndexSelected] = useState([]);
+
+  const notifyClick = (index) =>{
+    setclickedSource(!clickedSource);
+    indexSelected.push(index)
+  }
 
   const moveItem = (index, source, target) => {
     const sourceCopy = [...source];
     const targetCopy = [...target];
 
-    const [movedItem] = sourceCopy.splice(index, 1);
-    targetCopy.push(movedItem);
+    for(let i = 0; i < indexSelected.length;i++){
+      const [movedItem] = sourceCopy.splice(indexSelected[i], 1);
+      targetList.push(movedItem);
+    } 
 
-    source === sourceList ? setSourceList(sourceCopy) : setTargetList(targetCopy);
+    setIndexSelected([])
+
+    source === sourceList
+      ? setSourceList(sourceCopy)
+      : setTargetList(targetCopy);
   };
 
   return (
     <div className={styles.mainContainer}>
       <div className={styles.boxOptions}>
-        <div style={{borderBottom:"1px solid black", width:"100%", padding:"4px"}}>Source</div>
-        <ul type="checkbox">
+        <div
+          style={{
+            borderBottom: "1px solid black",
+            width: "100%",
+            padding: "4px",
+          }}
+        >
+          Source
+        </div>
+        <ul>
           {sourceList.map((item, index) => (
-            <li type="checkbox" key={index} onClick={() => moveItem(index, sourceList, targetList)}>
+            <li
+              key={index}
+              onClick={() => notifyClick(index)}
+            >
+              {indexSelected.includes(index) ? <CheckBoxIcon/> : <CheckBoxOutlineBlankIcon/> }
               {item}
             </li>
           ))}
         </ul>
       </div>
-      <div>
-        <button onClick={() => setSourceList([])}>&gt;&gt;</button>
-        <button onClick={() => setTargetList([])}>&lt;&lt;</button>
+      <div className={styles.moveButtons}>
+        <button onClick={() =>  moveItem(indexSelected, sourceList, targetList)}>&gt;&gt;</button>
+        <button onClick={() =>  moveItem(indexSelected, sourceList, targetList)}>&lt;&lt;</button>
       </div>
       <div className={styles.boxOptions}>
-        <div style={{borderBottom:"1px solid black", width:"100%", padding:"4px"}}>Target</div>
+        <div
+          style={{
+            borderBottom: "1px solid black",
+            width: "100%",
+            padding: "4px",
+          }}
+        >
+          Target
+        </div>
         <ul>
           {targetList.map((item, index) => (
-            <li key={index} onClick={() => moveItem(index, targetList, sourceList)}>
+            <li
+              key={index}
+              onClick={() => moveItem(index, targetList, sourceList)}
+            >
               {item}
             </li>
           ))}

@@ -97,7 +97,7 @@ const App = () => {
       <h3>Cascader</h3>
       <Cascader data={menusDesplegables} />
       <h3>Tranfer</h3>
-      <Transfer options={opciones} />
+      <Transfer peliculasVistas={opciones} />
     </div>
   );
 
