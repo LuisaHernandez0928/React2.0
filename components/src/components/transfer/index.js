@@ -1,33 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 const Transfer = ({ peliculasVistas }) => {
+  
   const [sourceList, setSourceList] = useState(peliculasVistas);
   const [targetList, setTargetList] = useState([]);
-  const [clickedSource, setclickedSource] = useState(false);
-  const [indexSelected, setIndexSelected] = useState([]);
+  const [checkReport, setCheckReport] = useState([]);
 
-  const notifyClick = (index) =>{
-    setclickedSource(!clickedSource);
-    indexSelected.push(index)
-  }
+  useEffect(() => {
+    setCheckReport(new Array(sourceList.length));
+  }, [sourceList]);
 
-  const moveItem = (index, source, target) => {
-    const sourceCopy = [...source];
+  const notifyClick = (index, item) => {
+    const copy = [...checkReport];
+    const current = copy[index] ?? false;
+    copy[index] = !current;
+    setCheckReport(copy);
+  };
+
+  const moveItem = (source, target, direction) => {
+    /*
+    console.log("source: " + source)
+    let sourceCopy = [...source];
     const targetCopy = [...target];
+    console.log("segundo: " + indexSelected)
 
     for(let i = 0; i < indexSelected.length;i++){
+      console.log("indexSelected[i]: " +indexSelected[i])
       const [movedItem] = sourceCopy.splice(indexSelected[i], 1);
-      targetList.push(movedItem);
-    } 
+      targetList.push( itemsSelected[i]);
+      if(indexSelected[i]<indexSelected[i+1]){
+        indexSelected[i+1] = indexSelected[i+1] -1;
+      }
+    }
 
-    setIndexSelected([])
-
+    console.log("source: " + source)
+    console.log("sourceList: " + sourceList)
+    
     source === sourceList
       ? setSourceList(sourceCopy)
       : setTargetList(targetCopy);
+    */
+    if (direction === "right") {
+      const targetCopy = [...target];
+      checkReport.forEach((item, i) => {
+        if (item) targetCopy.push(source[i]);
+      });
+
+      const sourceCopy = [];
+      source.forEach((item, i) => {
+        if (!checkReport[i]) sourceCopy.push(source[i]);
+      });
+
+      setSourceList(sourceCopy);
+      setTargetList(targetCopy);
+    }
   };
 
   return (
@@ -44,19 +73,25 @@ const Transfer = ({ peliculasVistas }) => {
         </div>
         <ul>
           {sourceList.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => notifyClick(index)}
-            >
-              {indexSelected.includes(index) ? <CheckBoxIcon/> : <CheckBoxOutlineBlankIcon/> }
+            <li key={index} onClick={() => notifyClick(index, item)}>
+              {checkReport[index] ? (
+                <CheckBoxIcon />
+              ) : (
+                <CheckBoxOutlineBlankIcon />
+              )}
+              {console.log("sourceList2: " + sourceList)}
               {item}
             </li>
           ))}
         </ul>
       </div>
       <div className={styles.moveButtons}>
-        <button onClick={() =>  moveItem(indexSelected, sourceList, targetList)}>&gt;&gt;</button>
-        <button onClick={() =>  moveItem(indexSelected, sourceList, targetList)}>&lt;&lt;</button>
+        <button onClick={() => moveItem(sourceList, targetList, "right")}>
+          &gt;&gt;
+        </button>
+        <button onClick={() => moveItem(sourceList, targetList, "left")}>
+          &lt;&lt;
+        </button>
       </div>
       <div className={styles.boxOptions}>
         <div
